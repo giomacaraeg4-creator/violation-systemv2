@@ -1,0 +1,41 @@
+# Visual Studio temporary files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NuGet packages
+**/packages/*
+
+# SQL Server local database files
+*.mdf
+*.ldf
+
+# User-specific settings
+*.pfx
+*.publishsettings
+
+# Node.js dependencies
+node_modules/
+
+# Python temporary files
+__pycache__/
+*.pyc
