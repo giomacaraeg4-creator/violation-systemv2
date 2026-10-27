@@ -25,10 +25,10 @@ Partial Class RegistrationRequestsForm
         Me.PanelHeader = New System.Windows.Forms.Panel()
         Me.lblHeaderTitle = New System.Windows.Forms.Label()
         Me.dgvRequests = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnUsername = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnRole = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColumnStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnApprove = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
@@ -68,7 +68,7 @@ Partial Class RegistrationRequestsForm
         Me.dgvRequests.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvRequests.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.dgvRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvRequests.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
+        Me.dgvRequests.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColumnID, Me.ColumnUsername, Me.ColumnRole, Me.ColumnStatus})
         Me.dgvRequests.Location = New System.Drawing.Point(15, 70)
         Me.dgvRequests.Name = "dgvRequests"
         Me.dgvRequests.ReadOnly = True
@@ -77,34 +77,34 @@ Partial Class RegistrationRequestsForm
         Me.dgvRequests.Size = New System.Drawing.Size(724, 310)
         Me.dgvRequests.TabIndex = 1
         '
-        'Column1
+        'ColumnID
         '
-        Me.Column1.DataPropertyName = "user_id"
-        Me.Column1.HeaderText = "ID"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Visible = False
+        Me.ColumnID.DataPropertyName = "user_id"
+        Me.ColumnID.HeaderText = "ID"
+        Me.ColumnID.Name = "ColumnID"
+        Me.ColumnID.ReadOnly = True
+        Me.ColumnID.Visible = False
         '
-        'Column2
+        'ColumnUsername
         '
-        Me.Column2.DataPropertyName = "username"
-        Me.Column2.HeaderText = "Username"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
+        Me.ColumnUsername.DataPropertyName = "username"
+        Me.ColumnUsername.HeaderText = "Username"
+        Me.ColumnUsername.Name = "ColumnUsername"
+        Me.ColumnUsername.ReadOnly = True
         '
-        'Column3
+        'ColumnRole
         '
-        Me.Column3.DataPropertyName = "user_role"
-        Me.Column3.HeaderText = "Role"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
+        Me.ColumnRole.DataPropertyName = "user_role"
+        Me.ColumnRole.HeaderText = "Role"
+        Me.ColumnRole.Name = "ColumnRole"
+        Me.ColumnRole.ReadOnly = True
         '
-        'Column4
+        'ColumnStatus
         '
-        Me.Column4.DataPropertyName = "status"
-        Me.Column4.HeaderText = "Status"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
+        Me.ColumnStatus.DataPropertyName = "status"
+        Me.ColumnStatus.HeaderText = "Status"
+        Me.ColumnStatus.Name = "ColumnStatus"
+        Me.ColumnStatus.ReadOnly = True
         '
         'btnApprove
         '
@@ -180,8 +180,8 @@ Partial Class RegistrationRequestsForm
     Friend WithEvents btnApprove As Button
     Friend WithEvents btnRefresh As Button
     Friend WithEvents btnBack As Button
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnID As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnUsername As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnRole As DataGridViewTextBoxColumn
+    Friend WithEvents ColumnStatus As DataGridViewTextBoxColumn
 End Class

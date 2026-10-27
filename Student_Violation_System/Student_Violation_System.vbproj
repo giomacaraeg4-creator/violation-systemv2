@@ -73,41 +73,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddStudentForm.Designer.vb">
-      <DependentUpon>AddStudentForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AddStudentForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddViolationModalForm.Designer.vb">
-      <DependentUpon>AddViolationModalForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AddViolationModalForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="DashboardForm.Designer.vb">
       <DependentUpon>DashboardForm.vb</DependentUpon>
     </Compile>
     <Compile Include="DashboardForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DigitalSignatureForm.Designer.vb">
-      <DependentUpon>DigitalSignatureForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="DigitalSignatureForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="DigitalViolationForm.Designer.vb">
       <DependentUpon>DigitalViolationForm.vb</DependentUpon>
     </Compile>
     <Compile Include="DigitalViolationForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.vb">
@@ -131,12 +106,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PendingViolationsForm.Designer.vb">
-      <DependentUpon>PendingViolationsForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PendingViolationsForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="RegisterForm.Designer.vb">
       <DependentUpon>RegisterForm.vb</DependentUpon>
     </Compile>
@@ -156,12 +125,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SessionModule.vb" />
-    <Compile Include="StudentListForm.Designer.vb">
-      <DependentUpon>StudentListForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="StudentListForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="TrashBinForm.Designer.vb">
       <DependentUpon>TrashBinForm.vb</DependentUpon>
     </Compile>
@@ -176,23 +139,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddStudentForm.resx">
-      <DependentUpon>AddStudentForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddViolationModalForm.resx">
-      <DependentUpon>AddViolationModalForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DashboardForm.resx">
       <DependentUpon>DashboardForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DigitalSignatureForm.resx">
-      <DependentUpon>DigitalSignatureForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DigitalViolationForm.resx">
       <DependentUpon>DigitalViolationForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
@@ -203,9 +154,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="PendingViolationsForm.resx">
-      <DependentUpon>PendingViolationsForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -214,9 +162,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportsForm.resx">
       <DependentUpon>ReportsForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StudentListForm.resx">
-      <DependentUpon>StudentListForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrashBinForm.resx">
       <DependentUpon>TrashBinForm.vb</DependentUpon>

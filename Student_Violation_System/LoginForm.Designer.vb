@@ -35,18 +35,20 @@ Partial Class LoginForm
         'TxtUser
         '
         Me.TxtUser.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.TxtUser.Location = New System.Drawing.Point(48, 38)
+        Me.TxtUser.Location = New System.Drawing.Point(64, 47)
+        Me.TxtUser.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtUser.Name = "TxtUser"
-        Me.TxtUser.Size = New System.Drawing.Size(190, 25)
+        Me.TxtUser.Size = New System.Drawing.Size(252, 30)
         Me.TxtUser.TabIndex = 2
         Me.TxtUser.Text = "UserName"
         '
         'TxtPass
         '
         Me.TxtPass.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.TxtPass.Location = New System.Drawing.Point(48, 88)
+        Me.TxtPass.Location = New System.Drawing.Point(64, 108)
+        Me.TxtPass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtPass.Name = "TxtPass"
-        Me.TxtPass.Size = New System.Drawing.Size(161, 25)
+        Me.TxtPass.Size = New System.Drawing.Size(213, 30)
         Me.TxtPass.TabIndex = 3
         Me.TxtPass.Text = "Password"
         Me.TxtPass.UseSystemPasswordChar = True
@@ -57,9 +59,10 @@ Partial Class LoginForm
         Me.BtnEye.FlatAppearance.BorderSize = 0
         Me.BtnEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnEye.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.BtnEye.Location = New System.Drawing.Point(211, 89)
+        Me.BtnEye.Location = New System.Drawing.Point(281, 110)
+        Me.BtnEye.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnEye.Name = "BtnEye"
-        Me.BtnEye.Size = New System.Drawing.Size(24, 23)
+        Me.BtnEye.Size = New System.Drawing.Size(32, 28)
         Me.BtnEye.TabIndex = 4
         Me.BtnEye.Text = "👁"
         Me.BtnEye.UseVisualStyleBackColor = False
@@ -71,9 +74,10 @@ Partial Class LoginForm
         Me.BtnLogin1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnLogin1.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
         Me.BtnLogin1.ForeColor = System.Drawing.Color.White
-        Me.BtnLogin1.Location = New System.Drawing.Point(23, 150)
+        Me.BtnLogin1.Location = New System.Drawing.Point(31, 185)
+        Me.BtnLogin1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnLogin1.Name = "BtnLogin1"
-        Me.BtnLogin1.Size = New System.Drawing.Size(215, 32)
+        Me.BtnLogin1.Size = New System.Drawing.Size(287, 39)
         Me.BtnLogin1.TabIndex = 5
         Me.BtnLogin1.Text = "Login"
         Me.BtnLogin1.UseVisualStyleBackColor = False
@@ -85,9 +89,10 @@ Partial Class LoginForm
         Me.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnRegister.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Underline)
         Me.BtnRegister.ForeColor = System.Drawing.Color.FromArgb(CType(CType(80, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.BtnRegister.Location = New System.Drawing.Point(63, 195)
+        Me.BtnRegister.Location = New System.Drawing.Point(84, 240)
+        Me.BtnRegister.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnRegister.Name = "BtnRegister"
-        Me.BtnRegister.Size = New System.Drawing.Size(135, 25)
+        Me.BtnRegister.Size = New System.Drawing.Size(180, 31)
         Me.BtnRegister.TabIndex = 6
         Me.BtnRegister.Text = "Create Account"
         Me.BtnRegister.UseVisualStyleBackColor = False
@@ -102,18 +107,20 @@ Partial Class LoginForm
         Me.PanelCard.Controls.Add(Me.BtnEye)
         Me.PanelCard.Controls.Add(Me.BtnLogin1)
         Me.PanelCard.Controls.Add(Me.BtnRegister)
-        Me.PanelCard.Location = New System.Drawing.Point(460, 145)
+        Me.PanelCard.Location = New System.Drawing.Point(613, 178)
+        Me.PanelCard.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PanelCard.Name = "PanelCard"
-        Me.PanelCard.Size = New System.Drawing.Size(260, 255)
+        Me.PanelCard.Size = New System.Drawing.Size(347, 314)
         Me.PanelCard.TabIndex = 1
         '
         'PbUserIcon
         '
         Me.PbUserIcon.BackColor = System.Drawing.Color.White
         Me.PbUserIcon.Image = Global.Student_Violation_System.My.Resources.Resources.user
-        Me.PbUserIcon.Location = New System.Drawing.Point(23, 38)
+        Me.PbUserIcon.Location = New System.Drawing.Point(31, 47)
+        Me.PbUserIcon.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PbUserIcon.Name = "PbUserIcon"
-        Me.PbUserIcon.Size = New System.Drawing.Size(22, 24)
+        Me.PbUserIcon.Size = New System.Drawing.Size(29, 30)
         Me.PbUserIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PbUserIcon.TabIndex = 6
         Me.PbUserIcon.TabStop = False
@@ -122,9 +129,10 @@ Partial Class LoginForm
         '
         Me.PbPassIcon.BackColor = System.Drawing.Color.White
         Me.PbPassIcon.Image = Global.Student_Violation_System.My.Resources.Resources.lock
-        Me.PbPassIcon.Location = New System.Drawing.Point(23, 90)
+        Me.PbPassIcon.Location = New System.Drawing.Point(31, 111)
+        Me.PbPassIcon.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PbPassIcon.Name = "PbPassIcon"
-        Me.PbPassIcon.Size = New System.Drawing.Size(22, 22)
+        Me.PbPassIcon.Size = New System.Drawing.Size(29, 27)
         Me.PbPassIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PbPassIcon.TabIndex = 7
         Me.PbPassIcon.TabStop = False
@@ -134,25 +142,27 @@ Partial Class LoginForm
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Image = Global.Student_Violation_System.My.Resources.Resources.download__3_
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(757, 458)
+        Me.PictureBox1.Size = New System.Drawing.Size(1009, 564)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
         'LoginForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(757, 458)
+        Me.ClientSize = New System.Drawing.Size(1009, 564)
         Me.Controls.Add(Me.PanelCard)
         Me.Controls.Add(Me.PictureBox1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "LoginForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CSTA - Login"
         Me.PanelCard.ResumeLayout(False)
         Me.PanelCard.PerformLayout()

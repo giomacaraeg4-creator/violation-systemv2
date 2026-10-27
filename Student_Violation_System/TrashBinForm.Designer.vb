@@ -19,9 +19,10 @@ Partial Class TrashBinForm
     Private Sub InitializeComponent()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblSubTitle = New System.Windows.Forms.Label()
+        Me.lblFilter = New System.Windows.Forms.Label()
+        Me.cmbFilterTrash = New System.Windows.Forms.ComboBox()
         Me.dgvTrash = New System.Windows.Forms.DataGridView()
-        Me.btnRestore = New System.Windows.Forms.Button()
-        Me.btnBack = New System.Windows.Forms.Button()
+        Me.ColumnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -32,6 +33,8 @@ Partial Class TrashBinForm
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.deleted_from = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnRestore = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
         CType(Me.dgvTrash, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -40,9 +43,9 @@ Partial Class TrashBinForm
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold)
         Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(80, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.lblTitle.Location = New System.Drawing.Point(30, 30)
+        Me.lblTitle.Location = New System.Drawing.Point(40, 37)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(325, 32)
+        Me.lblTitle.Size = New System.Drawing.Size(399, 41)
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "Archived Violation Records"
         '
@@ -51,11 +54,32 @@ Partial Class TrashBinForm
         Me.lblSubTitle.AutoSize = True
         Me.lblSubTitle.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.lblSubTitle.ForeColor = System.Drawing.Color.Gray
-        Me.lblSubTitle.Location = New System.Drawing.Point(32, 65)
+        Me.lblSubTitle.Location = New System.Drawing.Point(43, 80)
         Me.lblSubTitle.Name = "lblSubTitle"
-        Me.lblSubTitle.Size = New System.Drawing.Size(372, 19)
+        Me.lblSubTitle.Size = New System.Drawing.Size(463, 23)
         Me.lblSubTitle.TabIndex = 1
         Me.lblSubTitle.Text = "Manage deleted records. You can restore them if necessary."
+        '
+        'lblFilter
+        '
+        Me.lblFilter.AutoSize = True
+        Me.lblFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lblFilter.ForeColor = System.Drawing.Color.FromArgb(CType(CType(80, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.lblFilter.Location = New System.Drawing.Point(40, 130)
+        Me.lblFilter.Name = "lblFilter"
+        Me.lblFilter.Size = New System.Drawing.Size(76, 23)
+        Me.lblFilter.TabIndex = 5
+        Me.lblFilter.Text = "Filter By:"
+        '
+        'cmbFilterTrash
+        '
+        Me.cmbFilterTrash.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFilterTrash.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cmbFilterTrash.FormattingEnabled = True
+        Me.cmbFilterTrash.Location = New System.Drawing.Point(125, 126)
+        Me.cmbFilterTrash.Name = "cmbFilterTrash"
+        Me.cmbFilterTrash.Size = New System.Drawing.Size(220, 31)
+        Me.cmbFilterTrash.TabIndex = 6
         '
         'dgvTrash
         '
@@ -67,44 +91,23 @@ Partial Class TrashBinForm
         Me.dgvTrash.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvTrash.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.dgvTrash.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTrash.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.deleted_from})
-        Me.dgvTrash.Location = New System.Drawing.Point(30, 120)
+        Me.dgvTrash.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColumnID, Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.deleted_from})
+        Me.dgvTrash.Location = New System.Drawing.Point(40, 180)
         Me.dgvTrash.Name = "dgvTrash"
         Me.dgvTrash.ReadOnly = True
+        Me.dgvTrash.RowHeadersVisible = False
         Me.dgvTrash.RowHeadersWidth = 51
         Me.dgvTrash.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTrash.Size = New System.Drawing.Size(945, 530)
+        Me.dgvTrash.Size = New System.Drawing.Size(1260, 620)
         Me.dgvTrash.TabIndex = 2
         '
-        'btnRestore
+        'ColumnID
         '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.btnRestore.FlatAppearance.BorderSize = 0
-        Me.btnRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRestore.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnRestore.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnRestore.Location = New System.Drawing.Point(725, 70)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(120, 35)
-        Me.btnRestore.TabIndex = 3
-        Me.btnRestore.Text = "Restore Record"
-        Me.btnRestore.UseVisualStyleBackColor = False
-        '
-        'btnBack
-        '
-        Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBack.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.btnBack.FlatAppearance.BorderSize = 0
-        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBack.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnBack.Location = New System.Drawing.Point(855, 70)
-        Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(120, 35)
-        Me.btnBack.TabIndex = 4
-        Me.btnBack.Text = "Back"
-        Me.btnBack.UseVisualStyleBackColor = False
+        Me.ColumnID.DataPropertyName = "record_id"
+        Me.ColumnID.HeaderText = "ID"
+        Me.ColumnID.Name = "ColumnID"
+        Me.ColumnID.ReadOnly = True
+        Me.ColumnID.Visible = False
         '
         'Column1
         '
@@ -176,12 +179,44 @@ Partial Class TrashBinForm
         Me.deleted_from.Name = "deleted_from"
         Me.deleted_from.ReadOnly = True
         '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.btnRestore.FlatAppearance.BorderSize = 0
+        Me.btnRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRestore.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnRestore.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.btnRestore.Location = New System.Drawing.Point(967, 120)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(160, 43)
+        Me.btnRestore.TabIndex = 3
+        Me.btnRestore.Text = "Restore Record"
+        Me.btnRestore.UseVisualStyleBackColor = False
+        '
+        'btnBack
+        '
+        Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBack.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.btnBack.FlatAppearance.BorderSize = 0
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.btnBack.Location = New System.Drawing.Point(1140, 120)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(160, 43)
+        Me.btnBack.TabIndex = 4
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
         'TrashBinForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(232, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1008, 705)
+        Me.ClientSize = New System.Drawing.Size(1344, 868)
+        Me.Controls.Add(Me.cmbFilterTrash)
+        Me.Controls.Add(Me.lblFilter)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnRestore)
         Me.Controls.Add(Me.dgvTrash)
@@ -198,9 +233,12 @@ Partial Class TrashBinForm
 
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblSubTitle As Label
+    Friend WithEvents lblFilter As Label
+    Friend WithEvents cmbFilterTrash As ComboBox
     Friend WithEvents dgvTrash As DataGridView
     Friend WithEvents btnRestore As Button
     Friend WithEvents btnBack As Button
+    Friend WithEvents ColumnID As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn

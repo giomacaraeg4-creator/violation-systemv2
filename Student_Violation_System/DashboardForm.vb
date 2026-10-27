@@ -9,9 +9,34 @@ Public Class DashboardForm
     Private Sub DashboardForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         VbConnect()
+
+        ' 1. I-setup ang mga kursong available sa inyong eskwelahan
+        SetupCourseComboBox()
+
+        ' 2. I-display ang real month at year sa card (halimbawa: October 2026)
+        lblMonthVal.Text = DateTime.Now.ToString("MMMM yyyy")
+
+        ' 3. I-load ang analytics at chart
         LoadDashboardMetrics()
         LoadMonthlyChartData()
         CheckPendingAccountRequests()
+    End Sub
+
+    ' --- SETUP NG COURSE COMBOBOX (All, BSIT, BSHM, BSTM, BSED) ---
+    Private Sub SetupCourseComboBox()
+        cmbCourseFilter.Items.Clear()
+        cmbCourseFilter.Items.Add("All")
+        cmbCourseFilter.Items.Add("BSIT")
+        cmbCourseFilter.Items.Add("BSHM")
+        cmbCourseFilter.Items.Add("BSTM")
+        cmbCourseFilter.Items.Add("BSED")
+        cmbCourseFilter.SelectedIndex = 0 ' Default sa "All"
+    End Sub
+
+    ' --- KAPAG NAGPALIT NG COURSE SA COMBOBOX ---
+    Private Sub CmbCourseFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCourseFilter.SelectedIndexChanged
+        LoadDashboardMetrics()
+        LoadMonthlyChartData()
     End Sub
 
     ' --- NOTIFICATION CHECKER PARA SA MGA NAG-REGISTER NA ACCOUNT ---
@@ -22,8 +47,6 @@ Public Class DashboardForm
                 Dim query As String = "SELECT COUNT(*) FROM tbl_users WHERE status = 'Pending'"
                 Using cmd As New OdbcCommand(query, conn)
                     Dim pendingCount As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-
-                    ' I-update ang value sa PanelCard5
                     lblRequestsVal.Text = pendingCount.ToString()
                 End Using
             End Using
@@ -32,38 +55,47 @@ Public Class DashboardForm
         End Try
     End Sub
 
-    ' --- PAGKUHA NG MGA DATA MULA SA DATABASE PARA SA ANALYTICS ---
+    ' --- PAGKUHA NG MGA DATA MULA SA DATABASE PARA SA ANALYTICS (COURSE & REAL MONTH) ---
     Private Sub LoadDashboardMetrics()
         Try
             Using conn As OdbcConnection = GetConnection()
                 conn.Open()
 
-                ' 1. Total Violations
-                Dim queryViolations As String = "SELECT COUNT(*) FROM tbl_violation_records WHERE status != 'Archived'"
+                Dim selectedCourse As String = If(cmbCourseFilter.SelectedItem IsNot Nothing, cmbCourseFilter.SelectedItem.ToString(), "All")
+
+                ' I-update ang Course Card label para sumunod kung All o partikular na course ang pinili
+                lblCourse.Text = selectedCourse
+
+                Dim currentMonth As Integer = DateTime.Now.Month
+                Dim currentYear As Integer = DateTime.Now.Year
+
+                ' Base query condition para sa kasalukuyang buwan at taon
+                Dim baseCondition As String = "WHERE MONTH(created_at) = ? AND YEAR(created_at) = ?"
+
+                If selectedCourse <> "All" Then
+                    baseCondition &= " AND program = ?"
+                End If
+
+                ' 1. Total Violation Records (Lahat ng violation/records para sa buwan/course na ito)
+                Dim queryViolations As String = "SELECT COUNT(*) FROM tbl_violation_records " & baseCondition
                 Using cmd1 As New OdbcCommand(queryViolations, conn)
+                    cmd1.Parameters.AddWithValue("?", currentMonth)
+                    cmd1.Parameters.AddWithValue("?", currentYear)
+                    If selectedCourse <> "All" Then cmd1.Parameters.AddWithValue("?", selectedCourse)
+
                     Dim totalViolations As Integer = Convert.ToInt32(cmd1.ExecuteScalar())
                     lblViolationsVal.Text = totalViolations.ToString()
                 End Using
 
-                ' 2. Total Students mula sa school_portal_db.tbl_enrolled_students
-                Dim queryStudents As String = "SELECT COUNT(*) FROM school_portal_db.tbl_enrolled_students"
-                Using cmd2 As New OdbcCommand(queryStudents, conn)
-                    Dim totalStudents As Integer = Convert.ToInt32(cmd2.ExecuteScalar())
-                    lblStudentsVal.Text = totalStudents.ToString()
-                End Using
+                ' 2. Students with Violations (Unique students - kapag dalawa ang violation ng isang student, 1 lang ang bibilangin sa bilang ng estudyante)
+                Dim queryUniqueStudents As String = "SELECT COUNT(DISTINCT student_number) FROM tbl_violation_records " & baseCondition
+                Using cmd2 As New OdbcCommand(queryUniqueStudents, conn)
+                    cmd2.Parameters.AddWithValue("?", currentMonth)
+                    cmd2.Parameters.AddWithValue("?", currentYear)
+                    If selectedCourse <> "All" Then cmd2.Parameters.AddWithValue("?", selectedCourse)
 
-                ' 3. Total Recorded / Completed Slips
-                Dim queryRecorded As String = "SELECT COUNT(*) FROM tbl_violation_records WHERE status = 'Completed'"
-                Using cmd3 As New OdbcCommand(queryRecorded, conn)
-                    Dim totalRecorded As Integer = Convert.ToInt32(cmd3.ExecuteScalar())
-                    lblRecordedVal.Text = totalRecorded.ToString()
-                End Using
-
-                ' 4. Total Pending Slips
-                Dim queryPending As String = "SELECT COUNT(*) FROM tbl_violation_records WHERE status = 'Pending'"
-                Using cmd4 As New OdbcCommand(queryPending, conn)
-                    Dim totalPending As Integer = Convert.ToInt32(cmd4.ExecuteScalar())
-                    lblPendingVal.Text = totalPending.ToString()
+                    Dim uniqueStudents As Integer = Convert.ToInt32(cmd2.ExecuteScalar())
+                    lblStudentsVal.Text = uniqueStudents.ToString()
                 End Using
 
             End Using
@@ -79,19 +111,23 @@ Public Class DashboardForm
             Using conn As OdbcConnection = GetConnection()
                 conn.Open()
 
-                ' Kunin ang totoong kasalukuyang taon (Real Year, halimbawa 2026)
                 Dim currentYear As Integer = DateTime.Now.Year
+                Dim selectedCourse As String = If(cmbCourseFilter.SelectedItem IsNot Nothing, cmbCourseFilter.SelectedItem.ToString(), "All")
 
-                ' Itera ang buong 12 na buwan ng taon mula Enero (1) hanggang Disyembre (12)
                 For i As Integer = 1 To 12
                     Dim targetDate As New DateTime(currentYear, i, 1)
                     Dim monthName As String = targetDate.ToString("MMM") ' Halimbawa: Jan, Feb, Mar...
                     Dim monthNum As Integer = targetDate.Month
 
-                    Dim query As String = "SELECT COUNT(*) FROM tbl_violation_records WHERE MONTH(created_at) = ? AND YEAR(created_at) = ? AND status != 'Archived'"
+                    Dim query As String = "SELECT COUNT(*) FROM tbl_violation_records WHERE MONTH(created_at) = ? AND YEAR(created_at) = ?"
+                    If selectedCourse <> "All" Then
+                        query &= " AND program = ?"
+                    End If
+
                     Using cmd As New OdbcCommand(query, conn)
                         cmd.Parameters.AddWithValue("?", monthNum)
                         cmd.Parameters.AddWithValue("?", currentYear)
+                        If selectedCourse <> "All" Then cmd.Parameters.AddWithValue("?", selectedCourse)
 
                         Dim count As Integer = 0
                         Dim result = cmd.ExecuteScalar()
@@ -104,7 +140,6 @@ Public Class DashboardForm
                 Next
             End Using
         Catch ex As Exception
-            ' Fallback sakaling magka-issue sa database connection
             Dim months() As String = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
             For Each m In months
                 If Not monthlyData.ContainsKey(m) Then monthlyData.Add(m, 0)
@@ -173,32 +208,7 @@ Public Class DashboardForm
     End Sub
 
     ' --- CARD CLICK EVENTS ---
-    Private Sub PanelCard1_Click(sender As Object, e As EventArgs) Handles PanelCard1.Click, lblViolationsVal.Click, lblViolationsTitle.Click, PictureBox3.Click
-        Dim violationsForm As New ViolationsForm()
-        violationsForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub PanelCard2_Click(sender As Object, e As EventArgs) Handles PanelCard2.Click, lblStudentsVal.Click, lblStudentsTitle.Click, PictureBox2.Click
-        Dim studentListForm As New StudentListForm()
-        studentListForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub PanelCard3_Click(sender As Object, e As EventArgs) Handles PanelCard3.Click, lblRecordedVal.Click, lblRecordedTitle.Click, PictureBox1.Click
-        Dim violationsForm As New ViolationsForm()
-        violationsForm.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub PanelCard4_Click(sender As Object, e As EventArgs) Handles PanelCard4.Click, lblPendingVal.Click, lblPendingTitle.Click, PictureBox5.Click
-        Dim pendingForm As New PendingViolationsForm()
-        pendingForm.Show()
-        Me.Hide()
-    End Sub
-
-    ' Dito lamang bubukas ang RegistrationRequestsForm kapag PININDOT ang notification card
-    Private Sub PanelCard5_Click(sender As Object, e As EventArgs) Handles PanelCard5.Click, lblRequestsVal.Click, lblRequestsTitle.Click, PictureBox6.Click
+    Private Sub PanelCard5_Click(sender As Object, e As EventArgs) Handles PanelCard5.Click, lblRequestsVal.Click, lblRequestsTitle.Click
         Dim regForm As New RegistrationRequestsForm()
         regForm.Show()
         Me.Hide()
@@ -226,12 +236,6 @@ Public Class DashboardForm
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
         LogoutUser(Me)
-    End Sub
-
-    Private Sub StudentListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StudentListToolStripMenuItem.Click
-        Dim studentListForm As New StudentListForm()
-        studentListForm.Show()
-        Me.Hide()
     End Sub
 
     Private Sub ReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportsToolStripMenuItem.Click

@@ -8,7 +8,7 @@ Public Module SessionModule
 
     ' Global Function para sa ODBC Connection
     Public Function GetConnection() As OdbcConnection
-        Dim connectionString As String = "Driver={MySQL ODBC 26.7 Unicode Driver};Server=localhost;Database=student_violation_db;Uid=root;Password=Admin@123;Port=3306;"
+        Dim connectionString As String = "Driver={MySQL ODBC 26.7 Unicode Driver};Server=localhost;Database=csta_violation_db;Uid=root;Password=12345;Port=3306;"
         Return New OdbcConnection(connectionString)
     End Function
 
@@ -51,13 +51,4 @@ Public Module SessionModule
             ' Tahimik na hinahawakan ang error para hindi makaabala sa pangunahing daloy ng sistema
         End Try
     End Sub
-
-    ' Pangalawang Function para sa isa pang database (Halimbawa: School Portal DB)
-    Public Function GetSecondDatabaseConnection() As OdbcConnection
-        Dim connectionString As String = "Driver={MySQL ODBC 26.7 Unicode Driver};Server=localhost;Database=school_portal_db;Uid=root;Password=Admin@123;Port=3306;"
-        Return New OdbcConnection(connectionString) ' Ang Return ay laging nasa dulo ng Function
-    End Function
-
-
-
 End Module
